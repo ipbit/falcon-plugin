@@ -14,8 +14,7 @@ function agent_push {
         else
                 ENDPOINT=$HOSTNAME
         fi
-        curl -m 15 -X POST -d "[{\"metric\": \"$METRIC\", \"endpoint\": \"$ENDPOINT\", \"timestamp\": $TS,\"step\": $STEP,\"value\": $VALUE,\"counterType\": \"GAUGE\",\"tags\": \"$TAGS\"}]" http://127.0.0.1:1988/v1/push > 
-/dev/null 2>&1
+        curl -m 15 -X POST -d "[{\"metric\": \"$METRIC\", \"endpoint\": \"$ENDPOINT\", \"timestamp\": $TS,\"step\": $STEP,\"value\": $VALUE,\"counterType\": \"GAUGE\",\"tags\": \"$TAGS\"}]" http://127.0.0.1:1988/v1/push > /dev/null 2>&1
 }
 
 ###
