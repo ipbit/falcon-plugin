@@ -18,7 +18,7 @@ function agent_push {
 /dev/null 2>&1
 }
 
-
+#
 TS=$(date -d "`date +'%F %H:%M:00'`" +%s)
 echo "[{\"endpoint\": \"BJOffice-CPUseal6-188\", \"tags\": \"test=test1\", \"timestamp\": $TS, \"metric\": \"test.test1\", \"value\": 9, \"counterType\": \"GAUGE\", \"step\": 60}, {\"endpoint\": \"BJOffice-CPUseal6-188\", 
 \"tags\": \"test=test2\", \"timestamp\": $TS, \"metric\": \"test.test1\", \"value\": 9, \"counterType\": \"GAUGE\", \"step\": 60}]"
