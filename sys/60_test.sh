@@ -19,4 +19,4 @@ function agent_push {
 
 ###
 TS=$(date -d "`date +'%F %H:%M:00'`" +%s)
-echo "[{\"endpoint\": \"bjoffice-cpuseal6-219\", \"tags\": \"test=test1\", \"timestamp\": $TS, \"metric\": \"test.test1\", \"value\": 9, \"counterType\": \"GAUGE\", \"step\": 60}, {\"endpoint\": \"bjoffice-cpuseal6-219\", \"tags\": \"test=test2\", \"timestamp\": $TS, \"metric\": \"test.test1\", \"value\": 9, \"counterType\": \"GAUGE\", \"step\": 60}]"
+echo "[{\"endpoint\": \"$HOSTNAME\", \"tags\": \"test=test1\", \"timestamp\": $TS, \"metric\": \"test.test1\", \"value\": 9, \"counterType\": \"GAUGE\", \"step\": 60}, {\"endpoint\": \"$HOSTNAME\", \"tags\": \"test=test2\", \"timestamp\": $TS, \"metric\": \"test.test1\", \"value\": 9, \"counterType\": \"GAUGE\", \"step\": 60}]"
