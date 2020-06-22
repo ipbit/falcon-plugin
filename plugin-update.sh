@@ -7,6 +7,7 @@ RANDOM_SLEEP=`echo $(($RANDOM%3000))`
 
 
 sleep $RANDOM_SLEEP
+git reset --hard
 curl http://127.0.0.1:1988/plugin/update
 
 for SCRIPT_LIST in `find $PLUGIN_DIR -name "*" | grep -E "*.sh$|*.py$" `
