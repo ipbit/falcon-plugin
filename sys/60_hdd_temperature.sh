@@ -8,7 +8,7 @@ for HDD_NAME in `fdisk -l| grep /dev/sd | grep "Disk \/dev\/" | awk -F'/|:' '{pr
 do
     HDD_TEMP=`hddtemp /dev/$HDD_NAME | awk '{print $NF}' | grep -o "[0-9]\{1,2\}"`
 	TEMP_LIST[$id]=$HDD_TEMP
-    LIST[$id]="{\"endpoint\": \"$HOSTNAME\", \"tags\": hddname=$HDD_NAME, \"timestamp\": $TS, \"metric\": \"temperature.hdd\", \"value\": $TEMP, \"counterType\": \"GAUGE\", \"step\": 60}," 
+    LIST[$id]="{\"endpoint\": \"$HOSTNAME\", \"tags\": \"hddname=$HDD_NAME\", \"timestamp\": $TS, \"metric\": \"temperature.hdd\", \"value\": $TEMP, \"counterType\": \"GAUGE\", \"step\": 60}," 
 	id=$(($id+1))
 done
 
