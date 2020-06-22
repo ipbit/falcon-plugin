@@ -15,6 +15,6 @@ done
 
 
 MAX_TEMP=`echo ${TEMP_LIST[*]} | tr ' ' '\n' | sort -n | tail -1`
-LIST[0]="{\"endpoint\": \"$HOSTNAME\", \"tags\": , \"timestamp\": $TS, \"metric\": \"temperature.hdd.max\", \"value\": $MAX_TEMP, \"counterType\": \"GAUGE\", \"step\": 60}," 
+LIST[0]="{\"endpoint\": \"$HOSTNAME\", \"tags\": \"temperature=max\", \"timestamp\": $TS, \"metric\": \"temperature.hdd.max\", \"value\": $MAX_TEMP, \"counterType\": \"GAUGE\", \"step\": 60}," 
 
 echo ${LIST[*]} | sed -e 's/{/[{/' -e 's/},$/}]/'
