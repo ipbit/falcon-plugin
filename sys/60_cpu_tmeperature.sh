@@ -8,7 +8,7 @@ function push_intel_temp {
 	for cpu_id in `ls /sys/class/thermal/ | grep thermal_zone`
 	do
 		TEMP=`expr \`cat /sys/class/thermal/$cpu_id/temp\` / 1000`
-		LIST[$id]="{\"endpoint\": \"$HOSTNAME\", \"tags\": \"id=$id\“, \"timestamp\": $TS, \"metric\": \"cpu_temperature\", \"value\": $TEMP, \"counterType\": \"GAUGE\", \"step\": 60},"
+		LIST[$id]="{\"endpoint\": \"$HOSTNAME\", \"tags\": \"id=$id\", \"timestamp\": $TS, \"metric\": \"cpu_temperature\", \"value\": $TEMP, \"counterType\": \"GAUGE\", \"step\": 60},"
 		id=$(($id+1))
 	done
 }
