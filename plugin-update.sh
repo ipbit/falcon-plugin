@@ -7,6 +7,7 @@ RANDOM_SLEEP=`echo $(($RANDOM%3000))`
 
 
 sleep $RANDOM_SLEEP
+cd $PLUGIN_DIR
 git reset --hard
 git reset --hard origin/master
 
