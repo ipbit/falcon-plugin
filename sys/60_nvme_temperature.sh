@@ -19,7 +19,7 @@ which nvme > /dev/null || apt install nvme-cli -y > /dev/null 2>&1
 id=1
 for NVME_NAME in `fdisk -l| grep /dev/nvme | grep "Disk \/dev\/" | awk -F'/|:' '{print $3}'`
 do
-	VALUE=`nvme smart-log /dev/$NVME_NAME | grep ^"Temperature Sensor" | awk '{print $(NF-1)}' | sort -n | tail -1`
+	VALUE=`nvme smart-log /dev/$NVME_NAME | grep -e ^"Temperature Sensor" -e ^"temperature"  | awk '{print $(NF-1)}' | sort -n | tail -1`
 	TEMP_LIST[$id]=$VALUE
 	TAG="hddname=$NVME_NAME"
 	LIST[$id]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"
