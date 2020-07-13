@@ -29,7 +29,7 @@ then
 	exit 1
 fi
 
-STM=`su - ipfsbit -c "kubectl get pods -n lotus | grep lotus-storage | grep Running| awk '{print $1}'"`
+STM=`su - ipfsbit -c "kubectl get pods -n lotus" | grep lotus-storage | grep Running| awk '{print $1}'`
 if [ ! $STM ]
 then
 	VALUE=0
