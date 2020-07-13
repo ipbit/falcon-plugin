@@ -13,8 +13,8 @@ then
 	ENDPOINT=$HOSTNAME
 fi
 
-DAEMON=`kubectl get pods -n lotus | grep lotus-daemon | grep Running | awk '{print $1}' 2> /dev/null `
-VALUE=`kubectl  -n lotus exec -it $DAEMON -- /home/master/lotus sync status | grep "Stage:" | grep -i err | wc -l 2> /dev/null  `
+DAEMON=`su - ipfsbit -c "kubectl get pods -n lotus | grep lotus-daemon | grep Running | awk '{print $1}' 2> /dev/null"`
+VALUE=`su - ipfsbit -c "kubectl  -n lotus exec -it $DAEMON -- /home/master/lotus sync status | grep "Stage:" | grep -i err | wc -l 2> /dev/null"`
 
 function PRINT_LIST {
 	LIST[0]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"	

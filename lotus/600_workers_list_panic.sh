@@ -29,7 +29,7 @@ then
 	exit 1
 fi
 
-STM=`kubectl get pods -n lotus | grep lotus-storage | grep Running| awk '{print $1}'`
+STM=`su - ipfsbit -c "kubectl get pods -n lotus | grep lotus-storage | grep Running| awk '{print $1}'"`
 if [ ! $STM ]
 then
 	VALUE=0
@@ -38,7 +38,7 @@ then
 fi
 
 echo 1 > $LOCK
-kubectl exec -it $STM -n lotus -- /home/master/lotus-storage-miner workers list >  $TMP 2> /dev/null
+su - ipfsbit -c "kubectl exec -it $STM -n lotus -- /home/master/lotus-storage-miner workers list >  $TMP 2> /dev/null"
 PANIC=`cat $TMP | grep panic | wc -l`
 if [ $PANIC -ge 1 ]
 then
