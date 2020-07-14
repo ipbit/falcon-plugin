@@ -1,5 +1,5 @@
 #!/bin/bash
-#  0=dead,	1=workers panic
+#  -1=dead, -2=lock, 0=ok, 1=workers panic
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 TS=$(date -d "`date +'%F %H:%M:00'`" +%s)
@@ -24,7 +24,7 @@ function PRINT_LIST {
 LOCK=/tmp/lotus_workers_list_panic.lock
 if [ -e $LOCK ]
 then
-	VALUE=0
+	VALUE=-2
 	PRINT_LIST
 	exit 1
 fi
@@ -32,7 +32,7 @@ fi
 STM=`su - ipfsbit -c "kubectl get pods -n lotus" | grep lotus-storage | grep Running| awk '{print $1}'`
 if [ ! $STM ]
 then
-	VALUE=0
+	VALUE=-1
 	PRINT_LIST
 	exit 1
 fi
@@ -45,4 +45,7 @@ then
 	VALUE=1
 	PRINT_LIST
 	exit 0
+else
+	VALUE=0
+	PRINT_LIST
 fi
