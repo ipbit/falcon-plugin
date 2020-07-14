@@ -38,7 +38,7 @@ then
 fi
 
 echo 1 > $LOCK
-su - ipfsbit -c "kubectl exec -it $STM -n lotus -- /home/master/lotus-storage-miner workers list >  $TMP 2> /dev/null"
+su - ipfsbit -c "kubectl exec -it $STM -n lotus -- /home/master/lotus-storage-miner workers list" >  $TMP 2> /dev/null
 PANIC=`cat $TMP | grep panic | wc -l`
 if [ $PANIC -ge 1 ]
 then
