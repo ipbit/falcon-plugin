@@ -36,7 +36,7 @@ i=0
 for line in `cat $TMP | grep -A 10 ^"Sectors:"| sed '1d'`
 do
 	STATUS=`echo $line | awk -F':' '{print $1}'` 
-	VALUE=`echo $line | awk '{print $2}'` 
+	VALUE=`echo $line | awk -F':' '{print $2}'` 
 	TAG="info=$STATUS"
 	PRINT_LIST $i
 	i=$(($i+1))
