@@ -27,7 +27,8 @@ function PRINT_LIST {
 }
 
 echo 1 > $LOCK
-STM=`kubectl get pods -n lotus | grep lotus-storage | grep Running| awk '{print $1}'`
+#STM=`kubectl get pods -n lotus | grep lotus-storage | grep Running| awk '{print $1}'`
+STM=`su - ipfsbit -c "kubectl get pods -n lotus" | grep lotus-storage | grep Running| awk '{print $1}'`
 su - ipfsbit -c "kubectl -n lotus exec -it  $STM -- /home/master/lotus-storage-miner info" > $TMP
 
 sed -i "s/ //g" $TMP
