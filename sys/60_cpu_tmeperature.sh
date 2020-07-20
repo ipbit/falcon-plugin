@@ -29,7 +29,7 @@ function push_intel_temp {
 # 上传 AMD CPU 温度，需要安装lm-sensors
 function push_amd_temp {
 	id=0
-	for VALUE in `sensors | sed -n '/k10temp-/,+2p' | grep Tdie | awk -F[+°C] '{print $2}'`
+	for VALUE in `sensors | sed -n '/k10temp-/,+2p' | grep -e Tdie -e temp1 | awk -F[+°C] '{print $2}'`
 	do
 		TAG="id=$id"
 		LIST[$id]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"

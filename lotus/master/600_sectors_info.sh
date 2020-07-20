@@ -4,7 +4,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/us
 
 TS=$(date -d "`date +'%F %H:%M:00'`" +%s)
 METRIC=lotus.sectors
-STEP=300
+STEP=600
 
 ENDPOINT=`cat /usr/local/open-falcon/agent/config/cfg.json | grep hostname  | awk -F'"' '{print $4}'`
 if [ ! $ENDPOINT ]
