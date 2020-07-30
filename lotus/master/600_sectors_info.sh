@@ -9,7 +9,7 @@ STEP=600
 ENDPOINT=`cat /usr/local/open-falcon/agent/config/cfg.json | grep hostname  | awk -F'"' '{print $4}'`
 if [ ! $ENDPOINT ]
 then
-	ENDPOINT=$HOSTNAME
+        ENDPOINT=$HOSTNAME
 fi
 
 TMP=/tmp/lotus_sectors_info_falcon.tmp
@@ -21,8 +21,8 @@ then
 fi
 
 function PRINT_LIST {
-	n=$1
-	LIST[$n]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"	
+        n=$1
+        LIST[$n]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"
 }
 
 echo 1 > $LOCK
@@ -35,11 +35,11 @@ sed -i "s/\r//g" $TMP
 i=0
 for line in `cat $TMP | grep -A 10 ^"Sectors:"| sed '1d'`
 do
-	STATUS=`echo $line | awk -F':' '{print $1}'` 
-	VALUE=`echo $line | awk -F':' '{print $2}'` 
-	TAG="info=$STATUS"
-	PRINT_LIST $i
-	i=$(($i+1))
+        STATUS=`echo $line | awk -F':' '{print $1}'` 
+        VALUE=`echo $line | awk -F':' '{print $2}'` 
+        TAG="info=$STATUS"
+        PRINT_LIST $i
+        i=$(($i+1))
 done
 rm -rf $TMP $LOCK
 echo ${LIST[*]} | sed -e 's/{/[{/' -e 's/},$/}]/'
