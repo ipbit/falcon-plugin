@@ -13,7 +13,14 @@ then
 fi
 
 function PRINT_LIST {
-        VALUE=`ps aux | grep "lotus-worker run"| grep -v grep | wc -l`
+		PS=`ps aux | grep "lotus-worker" | grep 3456 | grep -v grep | wc -l`
+		LISTEN=`netstat -anputl | grep 3456 | grep LISTEN | wc -l`
+        if [ $PS -eq 1 ] && [ $LISTEN -eq 1 ]
+		then
+			VALUE=1
+		else
+			VALUE=1
+		fi
         LIST[0]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"
         echo ${LIST[*]} | sed -e 's/{/[{/' -e 's/},$/}]/'
 }
