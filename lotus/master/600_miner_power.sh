@@ -23,6 +23,7 @@ echo 1 > $LOCK
 MINER=`lotus-miner info | grep Miner | head -1 | awk '{print $NF}'`
 if [ -f $MINER ]
 then
+        rm -rf $LOCK
         exit 1
 fi
 
