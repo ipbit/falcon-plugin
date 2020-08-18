@@ -17,7 +17,7 @@ function PRINT_LIST {
 		LISTEN=`netstat -anputl | grep 3456 | grep LISTEN | wc -l`
         if [ $PS -ge 1 ] || [ $LISTEN -eq 1 ]
 		then
-			VALUE=1
+			VALUE=$PS
 		else
 			VALUE=0
 		fi
