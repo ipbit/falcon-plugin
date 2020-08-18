@@ -15,7 +15,7 @@ fi
 function PRINT_LIST {
 		PS=`ps aux | grep "lotus-worker" | grep run | grep -v grep | wc -l`
 		LISTEN=`netstat -anputl | grep 3456 | grep LISTEN | wc -l`
-        if [ $PS -eq 1 ] || [ $LISTEN -eq 1 ]
+        if [ $PS -ge 1 ] || [ $LISTEN -eq 1 ]
 		then
 			VALUE=1
 		else
