@@ -19,7 +19,7 @@ function PRINT_LIST {
 		then
 			VALUE=$PS
 		else
-			unset VALUE
+		        VALUE=0
 		fi
         LIST[0]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"
         echo ${LIST[*]} | sed -e 's/{/[{/' -e 's/},$/}]/'
