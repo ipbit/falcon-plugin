@@ -24,19 +24,25 @@ function PRINT_LIST {
 }
 
 i=1
-for SEALED in `ls /pool/filecoin/lotus-work*/sealed | grep ^"s\-"`
+for DIR in `find /pool/ -name sealed`
 do
+    for SEALED in `ls $DIR | grep ^"s\-"`
+    do
 	VALUE=1
 	TAG="type=sealed,sectors=$SEALED"
 	PRINT_LIST $i
 	i=$(($i+1))
+    done
 done
 
-for CACHE in `ls /pool/filecoin/lotus-work*/cache | grep ^"s\-"`
+for DIR in `find /pool/ -name cache`
 do
-	VALUE=`ls /pool/filecoin/lotus-work*/cache/$CACHE | grep -v aux | wc -l`
+    for CACHE in `ls $DIR | grep ^"s\-"`
+    do
+	VALUE=`ls $DIR/$CACHE | grep -v aux | wc -l`
 	TAG="type=cache,sectors=$CACHE"
 	PRINT_LIST $i
 	i=$(($i+1))
+    done
 done
 echo ${LIST[*]} | sed -e 's/{/[{/' -e 's/},$/}]/'
