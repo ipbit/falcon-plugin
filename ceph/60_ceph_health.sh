@@ -14,7 +14,7 @@ then
 fi
 
 
-CEPH_VALUE=`ceph -s | grep "health:" | awk -F'[: ]' '{print $NF}' 2> /dev/null`
+CEPH_VALUE=`ceph health | awk '{print $1}'`
 if [ "$CEPH_VALUE" == "HEALTH_OK" ]
 then
     VALUE=1
