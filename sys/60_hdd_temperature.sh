@@ -16,7 +16,11 @@ fi
 id=1
 for HDD_NAME in `fdisk -l| grep /dev/sd | grep "Disk \/dev\/" | awk -F'/|:' '{print $3}'`
 do
-	VALUE=`hddtemp /dev/$HDD_NAME | awk '{print $NF}' | grep -o "[0-9]\{1,2\}"`
+	VALUE=`hddtemp /dev/$HDD_NAME 2> /dev/null | awk '{print $NF}' | grep -o "[0-9]\{1,2\}"`
+	if [ ! $VALUE ]
+	then
+		continue
+	fi
 	TEMP_LIST[$id]=$VALUE
 	TAG="hddname=$HDD_NAME"
 	LIST[$id]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"
