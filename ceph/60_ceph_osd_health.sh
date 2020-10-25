@@ -20,9 +20,11 @@ function ceph_osd_health {
 	do
 		OSD=`echo $line | awk '{print $1}'`
 		HOST=`echo $line | awk '{print $2}'`
-		STATE=`echo $line | awk '{print $NF}'`
+		#STATE=`echo $line | awk '{print $NF}'`
 		TAG="host=$HOST,osd=$OSD"
-		if [ "$STATE" == "exists,up" ]
+		echo $line | awk '{print $NF}' | grep exists | grep up > /dev/null
+		#if [ "$STATE" == "exists,up" ]
+		if [ $? -eq 0 ]
 		then
 			VALUE=1
 		else
