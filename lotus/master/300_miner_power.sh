@@ -20,11 +20,6 @@ function PRINT_LIST {
         LIST[$n]="{\"endpoint\": \"$ENDPOINT\", \"tags\": \"$TAG\", \"timestamp\": $TS, \"metric\": \"$METRIC\", \"value\": $VALUE, \"counterType\": \"GAUGE\", \"step\": $STEP},"
 }
 
-
-echo ${LIST[*]} | sed -e 's/{/[{/' -e 's/},$/}]/'
-
-
-
 n=0
 for MINER in `echo $Miner`
 do
